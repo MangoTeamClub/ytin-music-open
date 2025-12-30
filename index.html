@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>云庭音乐开放平台 - 连接传统与未来的音乐社区</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --霁青蓝: #5D8AA8;
+            --月影白: #F5F7FA;
+            --苔痕灰: #6B7A7F;
+            --赤心橙: #E86A52;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        
+        body {
+            background-color: var(--月影白);
+            color: var(--苔痕灰);
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* 头部样式 */
+        header {
+            background-color: white;
+            box-shadow: 0 4px 12px rgba(93, 138, 168, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            color: var(--霁青蓝);
+            font-size: 2.2rem;
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--霁青蓝);
+            letter-spacing: 1px;
+        }
+        
+        .logo-text span {
+            color: var(--赤心橙);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--苔痕灰);
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 8px 0;
+            position: relative;
+        }
+        
+        nav a:hover {
+            color: var(--霁青蓝);
+        }
+        
+        nav a.active {
+            color: var(--霁青蓝);
+            font-weight: 600;
+        }
+        
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--霁青蓝);
+            border-radius: 2px;
+        }
+        
+        /* 主横幅区域 */
+        .hero {
+            background: linear-gradient(135deg, rgba(93, 138, 168, 0.1) 0%, rgba(245, 247, 250, 0.8) 100%);
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .hero h1 {
+            font-size: 3.2rem;
+            color: var(--霁青蓝);
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 30px;
+            color: var(--苔痕灰);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: var(--赤心橙);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+            box-shadow: 0 6px 15px rgba(232, 106, 82, 0.3);
+        }
+        
+        .cta-button:hover {
+            background-color: #d55a44;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(232, 106, 82, 0.4);
+        }
+        
+        /* 内容区域 */
+        .content-section {
+            margin-bottom: 80px;
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--霁青蓝);
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: var(--赤心橙);
+            border-radius: 2px;
+        }
+        
+        /* 发布音乐表单 */
+        .publish-form {
+            background-color: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 8px 30px rgba(93, 138, 168, 0.12);
+            margin-bottom: 40px;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--霁青蓝);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--霁青蓝);
+            outline: none;
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .form-hint {
+            font-size: 0.9rem;
+            color: #999;
+            margin-top: 5px;
+        }
+        
+        .email-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .email-option {
+            flex: 1;
+            min-width: 250px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            padding: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .email-option:hover {
+            border-color: var(--霁青蓝);
+            transform: translateY(-5px);
+        }
+        
+        .email-option.selected {
+            border-color: var(--霁青蓝);
+            background-color: rgba(93, 138, 168, 0.05);
+        }
+        
+        .email-icon {
+            font-size: 1.8rem;
+            color: var(--霁青蓝);
+            margin-bottom: 10px;
+        }
+        
+        .email-address {
+            font-weight: 600;
+            color: var(--霁青蓝);
+            margin-bottom: 5px;
+            word-break: break-all;
+        }
+        
+        .submit-button {
+            background-color: var(--霁青蓝);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            display: block;
+            margin: 40px auto 0;
+            box-shadow: 0 6px 15px rgba(93, 138, 168, 0.3);
+        }
+        
+        .submit-button:hover {
+            background-color: #4a7695;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(93, 138, 168, 0.4);
+        }
+        
+        /* 声明区域 */
+        .declarations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .declaration-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(107, 122, 127, 0.08);
+            transition: transform 0.3s;
+        }
+        
+        .declaration-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .declaration-icon {
+            font-size: 2.5rem;
+            color: var(--霁青蓝);
+            margin-bottom: 20px;
+        }
+        
+        .declaration-title {
+            font-size: 1.5rem;
+            color: var(--霁青蓝);
+            margin-bottom: 15px;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(93, 138, 168, 0.08);
+            border-radius: 10px;
+            margin-top: 40px;
+            font-weight: 600;
+            color: var(--霁青蓝);
+        }
+        
+        /* 页脚 */
+        footer {
+            background-color: var(--霁青蓝);
+            color: white;
+            padding: 60px 0 30px;
+            margin-top: 80px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-column p, .footer-column a {
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 12px;
+            display: block;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--赤心橙);
+            transform: translateY(-3px);
+        }
+        
+        .copyright-bar {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .publish-form {
+                padding: 25px;
+            }
+            
+            .email-option {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 头部导航 -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-cloud-music logo-icon"></i>
+                    <div class="logo-text">云庭<span>音乐</span></div>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="#" class="active">首页</a></li>
+                        <li><a href="#">发现音乐</a></li>
+                        <li><a href="#">音乐人</a></li>
+                        <li><a href="#">关于平台</a></li>
+                        <li><a href="#">联系我们</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主横幅 -->
+    <section class="hero">
+        <div class="container">
+            <h1>云庭音乐开放平台</h1>
+            <p>雨止云散，天空初晴。连接传统与未来的音乐社区，为音乐创作者提供一个纯净、开放的分享空间。</p>
+            <a href="#publish" class="cta-button">发布我的音乐作品</a>
+        </div>
+    </section>
+
+    <!-- 主要内容区域 -->
+    <div class="container">
+        <!-- 发布音乐部分 -->
+        <section id="publish" class="content-section">
+            <h2 class="section-title">发布音乐作品</h2>
+            <p style="text-align: center; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                将您的原创音乐作品发送到我们的指定邮箱，我们的团队将会审核并在平台上展示您的作品。
+            </p>
+            
+            <div class="publish-form">
+                <div class="form-group">
+                    <label class="form-label">选择接收邮箱</label>
+                    <div class="email-options">
+                        <div class="email-option selected" data-email="MangoClub2025@outlook.com">
+                            <i class="fas fa-envelope email-icon"></i>
+                            <div class="email-address">MangoClub2025@outlook.com</div>
+                            <p>推荐用于国际风格作品或英文歌曲</p>
+                        </div>
+                        <div class="email-option" data-email="MangoJiJi@qq.com">
+                            <i class="fas fa-envelope-open-text email-icon"></i>
+                            <div class="email-address">MangoJiJi@qq.com</div>
+                            <p>推荐用于华语作品或传统风格音乐</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="artistName" class="form-label">音乐人/乐队名称 *</label>
+                    <input type="text" id="artistName" class="form-control" placeholder="请输入您的音乐人名称">
+                </div>
+                
+                <div class="form-group">
+                    <label for="songTitle" class="form-label">作品名称 *</label>
+                    <input type="text" id="songTitle" class="form-control" placeholder="请输入您的音乐作品名称">
+                </div>
+                
+                <div class="form-group">
+                    <label for="songDescription" class="form-label">作品介绍</label>
+                    <textarea id="songDescription" class="form-control" placeholder="请简要描述您的音乐作品，包括创作背景、风格类型、灵感来源等"></textarea>
+                    <div class="form-hint">请控制在300字以内</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="attachmentInfo" class="form-label">作品文件</label>
+                    <input type="text" id="attachmentInfo" class="form-control" placeholder="请说明您将通过邮件附件发送的文件（如MP3音频文件、歌词文本、封面图片等）">
+                    <div class="form-hint">请将作品文件作为邮件附件发送到上方选择的邮箱地址</div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="contactInfo" class="form-label">联系方式</label>
+                    <input type="text" id="contactInfo" class="form-control" placeholder="请输入您的邮箱或电话，方便我们与您联系">
+                </div>
+                
+                <button type="button" class="submit-button" id="sendEmailBtn">
+                    <i class="fas fa-paper-plane"></i> 生成邮件并发送
+                </button>
+            </div>
+            
+            <!-- 平台声明部分 -->
+            <div class="declarations">
+                <div class="declaration-card">
+                    <i class="fas fa-heart declaration-icon"></i>
+                    <h3 class="declaration-title">非营利声明</h3>
+                    <p>云庭音乐开放平台是一个非营利性音乐分享社区，旨在为音乐创作者提供展示和交流的空间。平台不收取任何费用，所有服务均免费提供，致力于推动原创音乐的发展与传播。</p>
+                </div>
+                
+                <div class="declaration-card">
+                    <i class="fas fa-copyright declaration-icon"></i>
+                    <h3 class="declaration-title">版权声明</h3>
+                    <p>本平台所有展示的音乐作品版权归原作者所有。未经原作者明确授权，任何个人或组织不得擅自使用、复制、修改或传播平台上的音乐作品。如需使用作品，请直接联系音乐人获取授权。</p>
+                </div>
+                
+                <div class="declaration-card">
+                    <i class="fas fa-shield-alt declaration-icon"></i>
+                    <h3 class="declaration-title">用户协议</h3>
+                    <p>用户在本平台发布音乐作品即表示同意平台展示其作品，并保证作品为原创或已获得合法授权。平台有权对不符合规范的作品进行下架处理，但不会获取用户作品的任何版权。</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                版权声明 © 2025-2026 云庭音乐开放平台 保留所有权利
+            </div>
+        </section>
+    </div>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>云庭音乐</h3>
+                    <p>雨止云散，天空初晴。连接传统与未来的音乐社区，为音乐创作者提供一个纯净、开放的分享空间。</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>快速链接</h3>
+                    <a href="#">首页</a>
+                    <a href="#">发现音乐</a>
+                    <a href="#">音乐人榜单</a>
+                    <a href="#">平台指南</a>
+                    <a href="#">常见问题</a>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>联系我们</h3>
+                    <p>作品提交邮箱：</p>
+                    <a href="mailto:MangoClub2025@outlook.com">MangoClub2025@outlook.com</a>
+                    <a href="mailto:MangoJiJi@qq.com">MangoJiJi@qq.com</a>
+                    <p>合作咨询：contact@yuntingmusic.com</p>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>配色理念</h3>
+                    <p>主色 - 霁青蓝 #5D8AA8</p>
+                    <p>寓意：雨止云散，天空初晴。既有天空与科技的冷静感，又带着东方青瓷的温润与古典。</p>
+                </div>
+            </div>
+            
+            <div class="copyright-bar">
+                <p>云庭音乐开放平台 &copy; 2025-2026 | 非营利性音乐社区 | 设计灵感源于传统与现代的融合</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 邮箱选择交互
+        const emailOptions = document.querySelectorAll('.email-option');
+        let selectedEmail = 'MangoClub2025@outlook.com';
+        
+        emailOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                // 移除所有选项的选中状态
+                emailOptions.forEach(opt => opt.classList.remove('selected'));
+                // 添加当前选项的选中状态
+                this.classList.add('selected');
+                // 更新选中的邮箱
+                selectedEmail = this.getAttribute('data-email');
+            });
+        });
+        
+        // 发送邮件功能
+        document.getElementById('sendEmailBtn').addEventListener('click', function() {
+            const artistName = document.getElementById('artistName').value;
+            const songTitle = document.getElementById('songTitle').value;
+            const songDescription = document.getElementById('songDescription').value;
+            const attachmentInfo = document.getElementById('attachmentInfo').value;
+            const contactInfo = document.getElementById('contactInfo').value;
+            
+            // 简单验证
+            if (!artistName.trim() || !songTitle.trim()) {
+                alert('请填写音乐人名称和作品名称');
+                return;
+            }
+            
+            // 构建邮件内容
+            const subject = `音乐作品投稿：${songTitle} - ${artistName}`;
+            const body = `尊敬的云庭音乐平台：
+            
+音乐人/乐队名称：${artistName}
+作品名称：${songTitle}
+作品介绍：${songDescription}
+作品文件：${attachmentInfo}
+联系方式：${contactInfo}
+
+以上是我的音乐作品信息，附件中包含音乐文件及相关材料，请查收。
+
+谢谢！
+${artistName}`;
+            
+            // 创建邮件链接
+            const mailtoLink = `mailto:${selectedEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // 打开邮件客户端
+            window.open(mailtoLink);
+            
+            // 显示成功消息
+            alert(`邮件客户端已打开，收件人已设置为 ${selectedEmail}。请确认信息无误后发送邮件。`);
+        });
+        
+        // 表单悬停效果增强
+        const formControls = document.querySelectorAll('.form-control');
+        formControls.forEach(control => {
+            control.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            control.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // 导航栏滚动效果
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 20px rgba(93, 138, 168, 0.15)';
+            } else {
+                header.style.boxShadow = '0 4px 12px rgba(93, 138, 168, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
